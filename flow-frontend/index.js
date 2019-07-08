@@ -23,13 +23,30 @@
     const text = (e.target.querySelector('[name=item]')).value;
     const item = {
       text,
-      done: false
+      done: false,
+      category_id: parseInt(quadrant.dataset.postid)
     };
-
     itemList.push(item);
     populateList(itemList, quadrant);
+    //send post request to backend
+    postItem(item)
     localStorage.setItem(`${quadrant.dataset.id}`, JSON.stringify(itemList));
     e.target.reset();
+  }
+
+  function postItem(item){
+   
+    let configObj = {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item)
+    }
+    
+    fetch('http://localhost:3000/items', configObj)
+    .then(resp => resp.json())
+    .then(data => console.log(data))
   }
 
   function removeAllItems(){
@@ -52,8 +69,9 @@
     if (!e.target.matches('input')) return; 
     const el = e.target;
     const index = el.dataset.index;
+    console.log(index)
     itemList[index].done = !itemList[index].done;
-    localStorage.setItem('Q1Items', JSON.stringify(itemList));
+    localStorage.setItem(`${quadrant.dataset.id}`, JSON.stringify(itemList));
     populateList(itemList, quadrant);
   }
 
@@ -64,6 +82,9 @@
 
 
   Q1ToDo.addEventListener('click', e => toggleDone(e, Q1Items, Q1ToDo));
+  Q2ToDo.addEventListener('click', e => toggleDone(e, Q2Items, Q2ToDo));
+  Q3ToDo.addEventListener('click', e => toggleDone(e, Q3Items, Q3ToDo));
+  Q4ToDo.addEventListener('click', e => toggleDone(e, Q4Items, Q4ToDo));
 
   
   fetchListItems();
