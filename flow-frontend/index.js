@@ -75,14 +75,14 @@ function fetchListItems(){
 
 function assignList(data){
   
-    Q1Items = data.filter(item => item.category_id == 1) || JSON.parse(localStorage.getItem('Q1Items')) || [];
+    Q1Items = JSON.parse(localStorage.getItem('Q1Items')) ||data.filter(item => item.category_id == 1) || [];
 
-    Q2Items = data.filter(item => item.category_id == 2) || JSON.parse(localStorage.getItem('Q2Items')) || [];
+    Q2Items = JSON.parse(localStorage.getItem('Q2Items')) ||data.filter(item => item.category_id == 2) ||  [];
 
-    Q3Items = data.filter(item => item.category_id == 3) || JSON.parse(localStorage.getItem('Q3Items')) || [];
+    Q3Items = JSON.parse(localStorage.getItem('Q3Items')) || data.filter(item => item.category_id == 3) ||  [];
 
 
-    Q4Items = data.filter(item => item.category_id == 4) || JSON.parse(localStorage.getItem('Q4Items')) || [];
+    Q4Items = JSON.parse(localStorage.getItem('Q4Items')) ||data.filter(item => item.category_id == 4) || [];
 
     populateList(Q1Items, Q1ToDo);
     populateList(Q2Items, Q2ToDo);
