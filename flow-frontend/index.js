@@ -48,13 +48,13 @@
     }).join('');
   }
 
-  function toggleDone(e) {
-    if (!e.target.matches('input')) return; // skip this unless it's an input
+  function toggleDone(e, itemList, quadrant) {
+    if (!e.target.matches('input')) return; 
     const el = e.target;
     const index = el.dataset.index;
-    Q1Items[index].done = !Q1Items[index].done;
-    localStorage.setItem('Q1Items', JSON.stringify(Q1Items));
-    populateList(Q1Items, Q1ToDo);
+    itemList[index].done = !itemList[index].done;
+    localStorage.setItem('Q1Items', JSON.stringify(itemList));
+    populateList(itemList, quadrant);
   }
 
   quadrantOne.addEventListener('submit', e => addItem(e, Q1Items, Q1ToDo));
@@ -63,7 +63,7 @@
   quadrantFour.addEventListener('submit', e => addItem(e, Q4Items, Q4ToDo));
 
 
-  Q1ToDo.addEventListener('click', toggleDone);
+  Q1ToDo.addEventListener('click', e => toggleDone(e, Q1Items, Q1ToDo));
 
   
   fetchListItems();
@@ -89,8 +89,4 @@ function assignList(data){
     populateList(Q3Items, Q3ToDo);
     populateList(Q4Items, Q4ToDo);
     
-    console.log(Q1Items)
-    console.log(Q2Items)
-    console.log(Q3Items)
-    console.log(Q4Items)
 }
