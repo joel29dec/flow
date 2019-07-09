@@ -9,4 +9,10 @@ class ItemsController < ApplicationController
         p item
         render json: item
     end
+
+    def destroy
+        item = Item.find_by(id: params[:id])
+        item.destroy
+        render json: {DELETE: 'COMPLETE'}
+    end
 end

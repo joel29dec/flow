@@ -63,7 +63,7 @@
         <li>
           <input type="checkbox" data-id=${item.id} id="item${i}" ${item.done ? 'checked' : ''} />
           <label for="item${i}">${item.text}</label>
-          <button type="button" class="btn btn-default btn-sm">
+          <button type="button" class="btn btn-default btn-sm" data-id=${item.id}>
           <span class="glyphicon glyphicon-trash"></span> Trash 
         </button>
         </li>
@@ -98,11 +98,23 @@
   Q1ToDo.addEventListener('click', e => deleteItem(e, Q1Items, Q1ToDo));
 
 
+
   function deleteItem(e, itemList, quadrant){
     if (!e.target.matches('button')) return;
     console.log(e.target)
     console.log(itemList)
     console.log(quadrant)
+    
+    const id = e.target.dataset.id
+    //remove from database
+    //remove element from DOM
+    //remove element from local storage
+    console.log(id)
+    fetch(`http://localhost:3000/items/${id}`, {method: 'DELETE'})
+    .then(resp => resp.json())
+    .then(data => {console.log(data)})
+  localStorage.removeItem(`quadrant.dataset.id`);
+  
   }
 
 
