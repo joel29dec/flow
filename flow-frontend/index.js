@@ -3,6 +3,7 @@
   const quadrantTwo = document.querySelector('#Q2');
   const quadrantThree = document.querySelector('#Q3');
   const quadrantFour = document.querySelector('#Q4');
+  const body = document.querySelector('body')
 
   const Q1ToDo = document.querySelector('#Q1-todo');
 
@@ -55,6 +56,7 @@
   }
 
   function populateList(todo = [], todoList) {
+    // console.log(todoList)
     todoList.innerHTML = todo.map((item, i) => {
       return `
         <li>
@@ -66,26 +68,38 @@
   }
 
   function toggleDone(e, itemList, quadrant) {
-    if (!e.target.matches('input')) return; 
+    e.preventDefault()
+   //need to identify quadrant
+    // need to identify itemList
+    // console.log(e.target)
+    // console.log(quadrant)
+
+
+   
+    // if (!e.target.matches('input')) {return; }
+    // console.log(itemList)
     const el = e.target;
-    const id = el.dataset.id;
-    console.log(e.target)
-    console.log(id)
+    // console.log(el.previousSibling.previousSibling.dataset.id)
+    const id = el.previousSibling.previousSibling.dataset.id;
+    console.log(`id ${id}`)
     const item = itemList.find((item) => item.id == id);
+    // console.log(item)
     item.done = !item.done;
+
     localStorage.setItem(`${quadrant.dataset.id}`, JSON.stringify(itemList));
     populateList(itemList, quadrant);
   }
 
+  
   quadrantOne.addEventListener('submit', e => addItem(e, Q1Items, Q1ToDo));
   quadrantTwo.addEventListener('submit', e =>  addItem(e, Q2Items, Q2ToDo));
   quadrantThree.addEventListener('submit', e => addItem(e, Q3Items, Q3ToDo));
   quadrantFour.addEventListener('submit', e => addItem(e, Q4Items, Q4ToDo));
 
-
-  Q1ToDo.addEventListener('click', e => toggleDone(e, Q1Items, Q1ToDo));
-
+  // body.addEventListener("click", e => toggleDone(e, Q1Items, Q1ToDo))
   Q2ToDo.addEventListener('click', e => toggleDone(e, Q2Items, Q2ToDo));
+  Q1ToDo.addEventListener('click', e => toggleDone(e, Q1Items, Q1ToDo));
+  
   Q3ToDo.addEventListener('click', e => toggleDone(e, Q3Items, Q3ToDo));
   Q4ToDo.addEventListener('click', e => toggleDone(e, Q4Items, Q4ToDo));
 
