@@ -43,14 +43,31 @@ Q3ToDo.addEventListener('click', e => toggleDone(e, Q3Items, Q3ToDo));
 Q4ToDo.addEventListener('click', e => toggleDone(e, Q4Items, Q4ToDo));
 
 //event listeners for delete
-Q1ToDo.addEventListener('click', e => {deleteItem(e, Q1ToDo); Q1Items = [];})
-Q2ToDo.addEventListener('click', e => {deleteItem(e, Q2ToDo); Q2Items = [];})
-Q3ToDo.addEventListener('click', e => {deleteItem(e, Q3ToDo); Q3Items = [];})
-Q4ToDo.addEventListener('click', e => {deleteItem(e, Q4ToDo); Q4Items = [];})
+Q1ToDo.addEventListener('click', e => {deleteItem(e, Q1ToDo); Q1Items = Q1Items.filter( item =>  item.id != e.target.dataset.id ); console.log(Q1Items)})
+Q2ToDo.addEventListener('click', e => {deleteItem(e, Q2ToDo); Q2Items = Q2Items.filter( item =>  item.id != e.target.dataset.id ); console.log(Q2Items)})
+Q3ToDo.addEventListener('click', e => {deleteItem(e, Q3ToDo); Q3Items = Q3Items.filter( item =>  item.id != e.target.dataset.id ); console.log(Q3Items)})
+Q4ToDo.addEventListener('click', e => {deleteItem(e, Q4ToDo); Q4Items = Q4Items.filter( item =>  item.id != e.target.dataset.id ); console.log(Q4Items)})
 
-//event listener for edit
+// //event listener for edit
 
-Q1ToDo.addEventListener('click', e => toggleDone(e, Q1Items, Q1ToDo))
+// Q1ToDo.addEventListener('dblclick', e => editItem(e, Q1Items, Q1ToDo))
+
+
+// function editItem(e, itemList, quadrant){
+//   console.log(e.target)
+// }
+
+
+
+
+
+
+
+
+
+
+
+
 
 //event handler callbacks
 
@@ -64,6 +81,7 @@ function addItem(e, itemList, quadrant) {
   };
   itemList.push(item);
   populateList(itemList, quadrant);
+
   //send post request to backend
   postItem(item)
   localStorage.setItem(`${quadrant.dataset.id}`, JSON.stringify(itemList));
@@ -72,12 +90,15 @@ function addItem(e, itemList, quadrant) {
 
 function deleteItem(e, quadrant){
   if (!e.target.matches('button')) return;
+  //id of the Item in database
   const id = e.target.dataset.id
   fetch(`http://localhost:3000/items/${id}`, {method: 'DELETE'})
   .then(resp => resp.json())
   .then(data => {console.log(data)})
   localStorage.removeItem(`${quadrant.dataset.id}`);
+  
   e.target.parentNode.parentNode.removeChild(e.target.parentNode)
+  
 }
 
 function toggleDone(e, itemList, quadrant) {
@@ -91,7 +112,6 @@ function toggleDone(e, itemList, quadrant) {
   localStorage.setItem(`${quadrant.dataset.id}`, JSON.stringify(itemList));
   populateList(itemList, quadrant);
 }
-
 
 //database callback functions
 
