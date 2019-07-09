@@ -73,6 +73,8 @@
 
   function toggleDone(e, itemList, quadrant) {
     e.preventDefault()
+    if (!e.target.matches('label')) return;
+    console.log(e.target)
     const el = e.target;
     const id = el.previousSibling.previousSibling.dataset.id;
     const item = itemList.find((item) => item.id == id);
