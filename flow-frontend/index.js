@@ -1,4 +1,5 @@
 
+
   const quadrantOne = document.querySelector('#Q1');
   const quadrantTwo = document.querySelector('#Q2');
   const quadrantThree = document.querySelector('#Q3');
@@ -62,6 +63,9 @@
         <li>
           <input type="checkbox" data-id=${item.id} id="item${i}" ${item.done ? 'checked' : ''} />
           <label for="item${i}">${item.text}</label>
+          <button type="button" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-trash"></span> Trash 
+        </button>
         </li>
       `;
     }).join('');
@@ -69,21 +73,9 @@
 
   function toggleDone(e, itemList, quadrant) {
     e.preventDefault()
-   //need to identify quadrant
-    // need to identify itemList
-    // console.log(e.target)
-    // console.log(quadrant)
-
-
-   
-    // if (!e.target.matches('input')) {return; }
-    // console.log(itemList)
     const el = e.target;
-    // console.log(el.previousSibling.previousSibling.dataset.id)
     const id = el.previousSibling.previousSibling.dataset.id;
-    console.log(`id ${id}`)
     const item = itemList.find((item) => item.id == id);
-    // console.log(item)
     item.done = !item.done;
 
     localStorage.setItem(`${quadrant.dataset.id}`, JSON.stringify(itemList));
@@ -96,14 +88,15 @@
   quadrantThree.addEventListener('submit', e => addItem(e, Q3Items, Q3ToDo));
   quadrantFour.addEventListener('submit', e => addItem(e, Q4Items, Q4ToDo));
 
-  // body.addEventListener("click", e => toggleDone(e, Q1Items, Q1ToDo))
-  Q2ToDo.addEventListener('click', e => toggleDone(e, Q2Items, Q2ToDo));
-  Q1ToDo.addEventListener('click', e => toggleDone(e, Q1Items, Q1ToDo));
   
+  Q1ToDo.addEventListener('click', e => toggleDone(e, Q1Items, Q1ToDo));
+  Q2ToDo.addEventListener('click', e => toggleDone(e, Q2Items, Q2ToDo));
   Q3ToDo.addEventListener('click', e => toggleDone(e, Q3Items, Q3ToDo));
   Q4ToDo.addEventListener('click', e => toggleDone(e, Q4Items, Q4ToDo));
 
-  
+
+
+
   fetchListItems();
 
 
