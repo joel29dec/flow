@@ -74,7 +74,6 @@
   function toggleDone(e, itemList, quadrant) {
     e.preventDefault()
     if (!e.target.matches('label')) return;
-    console.log(e.target)
     const el = e.target;
     const id = el.previousSibling.previousSibling.dataset.id;
     const item = itemList.find((item) => item.id == id);
@@ -95,6 +94,17 @@
   Q2ToDo.addEventListener('click', e => toggleDone(e, Q2Items, Q2ToDo));
   Q3ToDo.addEventListener('click', e => toggleDone(e, Q3Items, Q3ToDo));
   Q4ToDo.addEventListener('click', e => toggleDone(e, Q4Items, Q4ToDo));
+
+  Q1ToDo.addEventListener('click', e => deleteItem(e, Q1Items, Q1ToDo));
+
+
+  function deleteItem(e, itemList, quadrant){
+    if (!e.target.matches('button')) return;
+    console.log(e.target)
+    console.log(itemList)
+    console.log(quadrant)
+  }
+
 
 
 
