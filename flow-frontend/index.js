@@ -51,10 +51,6 @@
     .then(data => console.log(data))
   }
 
-  function removeAllItems(){
-    localStorage.removeItem('Q1Items');
-    Q1ToDo.innerHTML = ''
-  }
 
   function populateList(todo = [], todoList) {
     // console.log(todoList)
@@ -90,30 +86,28 @@
   quadrantFour.addEventListener('submit', e => addItem(e, Q4Items, Q4ToDo));
 
   
-  Q1ToDo.addEventListener('click', e => toggleDone(e, Q1Items, Q1ToDo));
+  Q1ToDo.addEventListener('click', e => toggleDone(e, Q1Items, Q1ToDo))
   Q2ToDo.addEventListener('click', e => toggleDone(e, Q2Items, Q2ToDo));
   Q3ToDo.addEventListener('click', e => toggleDone(e, Q3Items, Q3ToDo));
   Q4ToDo.addEventListener('click', e => toggleDone(e, Q4Items, Q4ToDo));
 
-  Q1ToDo.addEventListener('click', e => deleteItem(e, Q1Items, Q1ToDo));
+  Q1ToDo.addEventListener('click', e => {deleteItem(e, Q1ToDo); Q1Items = [];})
+  Q2ToDo.addEventListener('click', e => {deleteItem(e, Q2ToDo); Q2Items = [];})
+  Q3ToDo.addEventListener('click', e => {deleteItem(e, Q3ToDo); Q3Items = [];})
+  Q4ToDo.addEventListener('click', e => {deleteItem(e, Q4ToDo); Q4Items = [];})
 
 
-
-  function deleteItem(e, itemList, quadrant){
+  function deleteItem(e, quadrant){
     if (!e.target.matches('button')) return;
-    console.log(e.target)
-    console.log(itemList)
-    console.log(quadrant)
+  
     
     const id = e.target.dataset.id
-    //remove from database
-    //remove element from DOM
-    //remove element from local storage
-    console.log(id)
+
     fetch(`http://localhost:3000/items/${id}`, {method: 'DELETE'})
     .then(resp => resp.json())
     .then(data => {console.log(data)})
-  localStorage.removeItem(`quadrant.dataset.id`);
+    localStorage.removeItem(`${quadrant.dataset.id}`);
+    e.target.parentNode.parentNode.removeChild(e.target.parentNode)
   
   }
 
