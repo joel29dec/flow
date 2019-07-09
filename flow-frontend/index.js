@@ -58,7 +58,7 @@
     todoList.innerHTML = todo.map((item, i) => {
       return `
         <li>
-          <input type="checkbox" data-index=${i} id="item${i}" ${item.done ? 'checked' : ''} />
+          <input type="checkbox" data-id=${item.id} id="item${i}" ${item.done ? 'checked' : ''} />
           <label for="item${i}">${item.text}</label>
         </li>
       `;
@@ -68,9 +68,11 @@
   function toggleDone(e, itemList, quadrant) {
     if (!e.target.matches('input')) return; 
     const el = e.target;
-    const index = el.dataset.index;
-    console.log(index)
-    itemList[index].done = !itemList[index].done;
+    const id = el.dataset.id;
+    console.log(e.target)
+    console.log(id)
+    const item = itemList.find((item) => item.id == id);
+    item.done = !item.done;
     localStorage.setItem(`${quadrant.dataset.id}`, JSON.stringify(itemList));
     populateList(itemList, quadrant);
   }
@@ -82,6 +84,7 @@
 
 
   Q1ToDo.addEventListener('click', e => toggleDone(e, Q1Items, Q1ToDo));
+
   Q2ToDo.addEventListener('click', e => toggleDone(e, Q2Items, Q2ToDo));
   Q3ToDo.addEventListener('click', e => toggleDone(e, Q3Items, Q3ToDo));
   Q4ToDo.addEventListener('click', e => toggleDone(e, Q4Items, Q4ToDo));
