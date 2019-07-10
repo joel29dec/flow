@@ -38,7 +38,7 @@ Q3ToDo.addEventListener('click', e => toggleDone(e, Q3Items, Q3ToDo));
 Q4ToDo.addEventListener('click', e => toggleDone(e, Q4Items, Q4ToDo));
 
 //event listeners for delete
-Q1ToDo.addEventListener('click', e => {deleteItem(e, Q1ToDo); Q1Items = Q1Items.filter( item =>  item.id != e.target.dataset.id ); console.log(Q1Items)})
-Q2ToDo.addEventListener('click', e => {deleteItem(e, Q2ToDo); Q2Items = Q2Items.filter( item =>  item.id != e.target.dataset.id ); console.log(Q2Items)})
-Q3ToDo.addEventListener('click', e => {deleteItem(e, Q3ToDo); Q3Items = Q3Items.filter( item =>  item.id != e.target.dataset.id ); console.log(Q3Items)})
-Q4ToDo.addEventListener('click', e => {deleteItem(e, Q4ToDo); Q4Items = Q4Items.filter( item =>  item.id != e.target.dataset.id ); console.log(Q4Items)})
+Q1ToDo.addEventListener('click', e => {deleteItem(e, Q1ToDo); Q1Items = Q1Items.filter( item =>  item.id != e.target.dataset.id );})
+Q2ToDo.addEventListener('click', e => {deleteItem(e, Q2ToDo); Q2Items = Q2Items.filter( item =>  item.id != e.target.dataset.id );})
+Q3ToDo.addEventListener('click', e => {deleteItem(e, Q3ToDo); Q3Items = Q3Items.filter( item =>  item.id != e.target.dataset.id );})
+Q4ToDo.addEventListener('click', e => {deleteItem(e, Q4ToDo); Q4Items = Q4Items.filter( item =>  item.id != e.target.dataset.id );})

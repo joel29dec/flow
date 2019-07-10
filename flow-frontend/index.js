@@ -32,38 +32,44 @@ function editForm(e, itemList, quadrant){
   Q1EditMain.insertAdjacentHTML( 'beforeend', editSubmit );
   //create patch request
   const editSubmitBtn = document.querySelector('#edit-submit');
- 
+  
+  //onchange listener feature** for greater optimization
 
   //save the id of the text in a dataset to patch and then save it to an array
+  const idsNode = Array.from(document.querySelectorAll('#Q1-editing'))
+  const ids = idsNode.map(id => {
+    return id[0].dataset.id
+  })
 
   //the event listener should receive a form update object
 
-  //maping over each patch object can be in this scope
-  editSubmitBtn.addEventListener('click', e => patchForm(e, itemList, quadrant))
+  editSubmitBtn.addEventListener('click', e => {ids.forEach( (id, index) => {
+    const changes = Array.from(e.target.parentElement.querySelectorAll('input'));
+    patchForm(changes[index].value, id)}
+  )})
+  
+  
+
+  //maping over each value and create an object and pass it 
+  
 }
 
 
-function patchForm(e, itemList, quadrant){
-  console.log(e.target)
-  console.log(itemList)
-  console.log(quadrant)
+function patchForm(text, id){
   
+  let formUpdate = {
+    text: text
+  }
 
-
-
-  // let formUpdate = {
-  //   likes: numFavorites
-  // }
-
-  // let configObj = {
-  //   method: "PATCH",
-  //   headers: {"Content-Type": "application/json"},
-  //   body: JSON.stringify(formUpdate)
-  // }
+  let configObj = {
+    method: "PATCH",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(formUpdate)
+  }
   
-  // fetch(`http://localhost:3000/toys/${id}`, configObj)
-  // .then(resp => resp.json())
-  // .then(data => e.target.previousSibling.innerText = `${data.likes} Likes`)
+  fetch(`http://localhost:3000/items/${id}`, configObj)
+  .then(resp => resp.json())
+  .then(data => console.log(data))
 }
 
 //event handler callbacks
