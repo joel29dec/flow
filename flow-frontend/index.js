@@ -16,11 +16,8 @@ function populateList(todo = [], todoList) {
 
 
 
-
+// itemList = Q1Items, quadrant = Q1ToDo
 function editForm(e, itemList, quadrant){
-  console.log(e.target)
-  console.log(itemList)
-  console.log(quadrant)
   //remove all quadrant div elements
   Q1EditMain.innerHTML = ""
   //render form in quadrant
@@ -32,9 +29,19 @@ function editForm(e, itemList, quadrant){
     `;
   }).join('');
   //create submit button
+  const editSubmit = '<input type="submit" class="edit-button" value="Save Changes" id="edit-submit"></input>'
+  Q1EditMain.insertAdjacentHTML( 'beforeend', editSubmit );
   //create patch request
+  const editSubmitBtn = document.querySelector('#edit-submit');
+  editSubmitBtn.addEventListener('click', e => patchForm(e, itemList, quadrant))
 }
 
+
+function patchForm(e, itemList, quadrant){
+  console.log(e.target)
+  console.log(itemList)
+  console.log(quadrant)
+}
 
 //event handler callbacks
 
