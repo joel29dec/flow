@@ -21,6 +21,18 @@ function editForm(e, itemList, quadrant){
   console.log(e.target)
   console.log(itemList)
   console.log(quadrant)
+  //remove all quadrant div elements
+  Q1EditMain.innerHTML = ""
+  //render form in quadrant
+  Q1EditMain.innerHTML = itemList.map((item, i) => {
+    return `
+    <form id="Q1-editing" class="edit-items">
+      <input type="text" name="item" value="${item.text}" size="35">
+    </form>
+    `;
+  }).join('');
+  //create submit button
+  //create patch request
 }
 
 
