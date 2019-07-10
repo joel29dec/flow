@@ -45,7 +45,6 @@ function editForm(e, itemList, quadrant){
     let changes = Array.from(e.target.parentElement.querySelectorAll('input'))
     changes.splice(-1, 1)
     patchForm(changes, ids)
-    populateList(Q1Items, Q1ToDo);
     Q1EditMain.innerHTML = ""
       Q1EditMain.innerHTML = 
       `<button id="Q1-edit-btn" type="button" class="btn btn-default btn-sm glyphicon glyphicon-cog">
@@ -64,13 +63,6 @@ function editForm(e, itemList, quadrant){
   
 }
 
-
-// Q1Items = Q1Items.filter( item =>  item.id != e.target.dataset.id )
-// Q1ToDo.addEventListener('click', e => {deleteItem(e, Q1ToDo); Q1Items = Q1Items.filter( item =>  item.id != e.target.dataset.id );})
-
-// Q1Items.find( item =>  item.id == 1 ).text = "Finish my project"
-
-
 function patchForm(textChanges, ids){
   
   const input = textChanges
@@ -82,13 +74,12 @@ function patchForm(textChanges, ids){
   let formUpdate = {
     text: input.shift().value
   }
-  // console.log(formUpdate)
+
   let configObj = {
     method: "PATCH",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(formUpdate)
   }
-  // console.log(configObj)
   
   fetch(`http://localhost:3000/items/${id}`, configObj)
   .then(resp => resp.json())
@@ -98,9 +89,10 @@ function patchForm(textChanges, ids){
   }
 }
 
+
+
+
 //event handler callbacks
-
-
 
 function addItem(e, itemList, quadrant) {
   e.preventDefault();

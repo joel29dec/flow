@@ -22,6 +22,28 @@ html {
   width: 200px;
   margin-bottom: 50px;
 } */
+#Q1-edit-btn{
+  margin-left: 250px;
+}
+
+#Q2-edit-btn{
+  margin-left: 250px;
+}
+
+#Q3-edit-btn{
+  margin-left: 250px;
+}
+
+#Q4-edit-btn{
+  margin-left: 250px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2 , 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 1%;
+}
 
 .wrapper {
   padding: 20px;
@@ -30,6 +52,7 @@ html {
   box-shadow: 0 0 0 10px rgba(0,0,0,0.1);
   border-radius: 10px;
 }
+
 
 
 h2 {
