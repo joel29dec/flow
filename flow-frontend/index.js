@@ -60,6 +60,8 @@ function editForm(e, itemList, quadrant){
         <input type="submit" value="+ Add Item">
     </form>`
     Q1ToDo = document.querySelector('#Q1-todo');
+    Q1EditBtn = document.querySelector('#Q1-edit-btn');
+    Q1EditBtn.addEventListener('click', e => editForm(e, Q1Items, Q1ToDo))
   })
   
 }

@@ -15,7 +15,7 @@ let Q3Items = JSON.parse(localStorage.getItem('Q3Items')) || [];
 let Q4ToDo = document.querySelector('#Q4-todo');
 let Q4Items = JSON.parse(localStorage.getItem('Q4Items')) || [];
 
-const Q1EditBtn = document.querySelector('#Q1-edit-btn');
+let Q1EditBtn = document.querySelector('#Q1-edit-btn');
 const Q1EditMain = document.querySelector('#Q1-Main');
 
 
