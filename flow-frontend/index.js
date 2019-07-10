@@ -13,8 +13,6 @@ function populateList(todo = [], todoList) {
 }
 
 
-
-
 // itemList = Q1Items, quadrant = Q1ToDo
 function editForm(e, itemList, quadrant){
   //remove all quadrant div elements
