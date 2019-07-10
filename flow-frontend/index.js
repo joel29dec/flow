@@ -68,6 +68,8 @@ function patchForm(e, itemList, quadrant){
 
 //event handler callbacks
 
+
+
 function addItem(e, itemList, quadrant) {
   e.preventDefault();
   const text = (e.target.querySelector('[name=item]')).value;
@@ -76,12 +78,10 @@ function addItem(e, itemList, quadrant) {
     done: false,
     category_id: parseInt(quadrant.dataset.postid)
   };
-  itemList.push(item);
-  populateList(itemList, quadrant);
 
   //send post request to backend
-  postItem(item)
-  localStorage.setItem(`${quadrant.dataset.id}`, JSON.stringify(itemList));
+  postItem(item, itemList, quadrant)
+  
   e.target.reset();
 }
 
@@ -112,7 +112,7 @@ function toggleDone(e, itemList, quadrant) {
 
 //database callback functions
 
-function postItem(item){
+function postItem(item, itemList, quadrant){
   
   let configObj = {
     method: "POST",
@@ -124,8 +124,12 @@ function postItem(item){
   
   fetch('http://localhost:3000/items', configObj)
   .then(resp => resp.json())
-  .then(data => console.log(data))
+  .then(data => {itemList.push(data);
+    populateList(itemList, quadrant);
+    localStorage.setItem(`${quadrant.dataset.id}`, JSON.stringify(itemList));
+  })
 }
+
 
 
 function fetchListItems(){
