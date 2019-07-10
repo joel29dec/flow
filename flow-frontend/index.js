@@ -5,8 +5,7 @@ function populateList(todo = [], todoList) {
       <li>
         <input type="checkbox" data-id=${item.id} id="item${i}" ${item.done ? 'checked' : ''} />
         <label for="item${i}">${item.text}</label>
-        <button type="button" class="btn btn-default btn-sm" data-id=${item.id}>
-        <span class="glyphicon glyphicon-trash"></span> 
+        <button type="button" class="btn btn-default btn-sm glyphicon glyphicon-trash" data-id=${item.id}>
       </button>
       </li>
     `;
@@ -24,7 +23,7 @@ function editForm(e, itemList, quadrant){
   Q1EditMain.innerHTML = itemList.map((item, i) => {
     return `
     <form id="Q1-editing" class="edit-items">
-      <input type="text" name="item" value="${item.text}" size="35">
+      <input type="text" name="item" value="${item.text}" data-id="${item.id}" size="35">
     </form>
     `;
   }).join('');
@@ -33,6 +32,13 @@ function editForm(e, itemList, quadrant){
   Q1EditMain.insertAdjacentHTML( 'beforeend', editSubmit );
   //create patch request
   const editSubmitBtn = document.querySelector('#edit-submit');
+ 
+
+  //save the id of the text in a dataset to patch and then save it to an array
+
+  //the event listener should receive a form update object
+
+  //maping over each patch object can be in this scope
   editSubmitBtn.addEventListener('click', e => patchForm(e, itemList, quadrant))
 }
 
@@ -41,6 +47,23 @@ function patchForm(e, itemList, quadrant){
   console.log(e.target)
   console.log(itemList)
   console.log(quadrant)
+  
+
+
+
+  // let formUpdate = {
+  //   likes: numFavorites
+  // }
+
+  // let configObj = {
+  //   method: "PATCH",
+  //   headers: {"Content-Type": "application/json"},
+  //   body: JSON.stringify(formUpdate)
+  // }
+  
+  // fetch(`http://localhost:3000/toys/${id}`, configObj)
+  // .then(resp => resp.json())
+  // .then(data => e.target.previousSibling.innerText = `${data.likes} Likes`)
 }
 
 //event handler callbacks
