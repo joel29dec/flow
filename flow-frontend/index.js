@@ -40,36 +40,43 @@ function editForm(e, itemList, quadrant){
   const ids = idsNode.map(id => {
     return id[0].dataset.id
   })
-
   //the event listener should receive a form update object
-
-  editSubmitBtn.addEventListener('click', e => {ids.forEach( (id, index) => {
-    const changes = Array.from(e.target.parentElement.querySelectorAll('input'));
-    patchForm(changes[index].value, id)}
-  )})
   
+  editSubmitBtn.addEventListener('click', e => 
+    {let changes = Array.from(e.target.parentElement.querySelectorAll('input'))
+    changes.splice(-1, 1)
+    patchForm(changes, ids)})
   
-
   //maping over each value and create an object and pass it 
   
 }
 
 
-function patchForm(text, id){
+function patchForm(textChanges, id){
+  
+  const input = textChanges
+  const idArr = id
+
+  if (idArr.length > 0){
   
   let formUpdate = {
-    text: text
+    text: input.shift().value
   }
-
+  console.log(formUpdate)
   let configObj = {
     method: "PATCH",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(formUpdate)
   }
+  console.log(configObj)
+  // // // console.log(`http://localhost:3000/items/${id.shift()}`)
   
-  fetch(`http://localhost:3000/items/${id}`, configObj)
+  fetch(`http://localhost:3000/items/${idArr.shift()}`, configObj)
   .then(resp => resp.json())
-  .then(data => console.log(data))
+  .then(data => patchForm(input, idArr))
+  }else{
+    return;
+  }
 }
 
 //event handler callbacks
