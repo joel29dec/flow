@@ -6,13 +6,13 @@ const quadrantFour = document.querySelector('#Q4');
 const body = document.querySelector('body')
 
 //ul of Quadrant items
-const Q1ToDo = document.querySelector('#Q1-todo');
+let Q1ToDo = document.querySelector('#Q1-todo');
 let Q1Items;
-const Q2ToDo = document.querySelector('#Q2-todo');
+let Q2ToDo = document.querySelector('#Q2-todo');
 let Q2Items;
-const Q3ToDo = document.querySelector('#Q3-todo');
+let Q3ToDo = document.querySelector('#Q3-todo');
 let Q3Items = JSON.parse(localStorage.getItem('Q3Items')) || [];
-const Q4ToDo = document.querySelector('#Q4-todo');
+let Q4ToDo = document.querySelector('#Q4-todo');
 let Q4Items = JSON.parse(localStorage.getItem('Q4Items')) || [];
 
 const Q1EditBtn = document.querySelector('#Q1-edit-btn');

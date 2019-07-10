@@ -43,39 +43,58 @@ function editForm(e, itemList, quadrant){
   //the event listener should receive a form update object
   
   editSubmitBtn.addEventListener('click', e => 
-    {let changes = Array.from(e.target.parentElement.querySelectorAll('input'))
+    {
+    let changes = Array.from(e.target.parentElement.querySelectorAll('input'))
     changes.splice(-1, 1)
-    patchForm(changes, ids)})
-  
-  //maping over each value and create an object and pass it 
+    patchForm(changes, ids)
+    populateList(Q1Items, Q1ToDo);
+    Q1EditMain.innerHTML = ""
+      Q1EditMain.innerHTML = 
+      `<button id="Q1-edit-btn" type="button" class="btn btn-default btn-sm glyphicon glyphicon-cog">
+      </button>
+      <p></p>
+      <ul id="Q1-todo" class="todo" data-id="Q1Items" data-postid="1">
+      </ul>
+      <form id="Q1" class="add-items">
+        <input type="text" name="item" placeholder="Item Name" required>
+        <input type="submit" value="+ Add Item">
+    </form>`
+    Q1ToDo = document.querySelector('#Q1-todo');
+  })
   
 }
 
 
-function patchForm(textChanges, id){
+// Q1Items = Q1Items.filter( item =>  item.id != e.target.dataset.id )
+// Q1ToDo.addEventListener('click', e => {deleteItem(e, Q1ToDo); Q1Items = Q1Items.filter( item =>  item.id != e.target.dataset.id );})
+
+// Q1Items.find( item =>  item.id == 1 ).text = "Finish my project"
+
+
+function patchForm(textChanges, ids){
   
   const input = textChanges
-  const idArr = id
-
+  const idArr = ids
+  
   if (idArr.length > 0){
   
+  const id = idArr.shift()
   let formUpdate = {
     text: input.shift().value
   }
-  console.log(formUpdate)
+  // console.log(formUpdate)
   let configObj = {
     method: "PATCH",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(formUpdate)
   }
-  console.log(configObj)
-  // // // console.log(`http://localhost:3000/items/${id.shift()}`)
+  // console.log(configObj)
   
-  fetch(`http://localhost:3000/items/${idArr.shift()}`, configObj)
+  fetch(`http://localhost:3000/items/${id}`, configObj)
   .then(resp => resp.json())
-  .then(data => patchForm(input, idArr))
+  .then(data => {Q1Items.find( item =>  item.id == id ).text = data.text; patchForm(input, idArr)})
   }else{
-    return;
+    return populateList(Q1Items, Q1ToDo);
   }
 }
 
