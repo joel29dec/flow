@@ -100,7 +100,7 @@
     </div>
     <div class="panel panel2">
       <p>Take</p>
-      <p id="start">Start</p>
+      <p id="start" onclick="">Start</p>
       <p>Control</p>
     </div>
   
@@ -113,24 +113,29 @@
       this.classList.toggle('open');
     }
 
+    const start = document.getElementById("start")
+   
     function toggleActive(e) {
       console.log(e.propertyName);
+     
       if (e.propertyName.includes('flex')) {
         this.classList.toggle('open-active');
+        start.onclick = () => document.location.href = 'index.html',true;
+ 
       }
     }
 
     panels.forEach(panel => panel.addEventListener('click', toggleOpen));
     panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
 
-    const start = document.getElementById("start")
 
-    function launch(){
-      console.log(this)
-      // this.onclick = "location.href='index.html';"
-    }
+    // start.addEventListener('transitionend', launch);
+    // function launch(){
+    //   console.log("Done")
+      
+    // }
     
-    panel.addEventListener('transitionend', toggleActive);
+    
   </script>
 
 </body>
