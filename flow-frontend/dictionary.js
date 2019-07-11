@@ -15,14 +15,32 @@ let Q3Items = JSON.parse(localStorage.getItem('Q3Items')) || [];
 let Q4ToDo = document.querySelector('#Q4-todo');
 let Q4Items = JSON.parse(localStorage.getItem('Q4Items')) || [];
 
+
+//edit button and main div
 let Q1EditBtn = document.querySelector('#Q1-edit-btn');
 const Q1EditMain = document.querySelector('#Q1-Main');
 
+let Q2EditBtn = document.querySelector('#Q2-edit-btn');
+const Q2EditMain = document.querySelector('#Q2-Main');
+
+let Q3EditBtn = document.querySelector('#Q3-edit-btn');
+const Q3EditMain = document.querySelector('#Q3-Main');
+
+let Q4EditBtn = document.querySelector('#Q4-edit-btn');
+const Q4EditMain = document.querySelector('#Q4-Main');
 
 
 //event listeners for edit
-Q1EditBtn.addEventListener('click', e => editForm(e, Q1Items, Q1ToDo))
+Q1EditBtn.addEventListener('click', e => editFormQ1(e, Q1Items, Q1ToDo))
 
+//event listeners for edit
+Q2EditBtn.addEventListener('click', e => editFormQ2(e, Q2Items, Q2ToDo))
+
+//event listeners for edit
+Q3EditBtn.addEventListener('click', e => editFormQ3(e, Q3Items, Q3ToDo))
+
+//event listeners for edit
+Q4EditBtn.addEventListener('click', e => editFormQ4(e, Q4Items, Q4ToDo))
 
 
 //event listeners for submit
