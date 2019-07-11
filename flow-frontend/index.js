@@ -66,7 +66,8 @@ function editFormQ1(e, itemList, quadrant) {
     </form>`;
     Q1ToDo = document.querySelector("#Q1-todo");
     Q1EditBtn = document.querySelector("#Q1-edit-btn");
-    Q1EditBtn.addEventListener("click", e => editFormQ1(e, Q1Items, Q1ToDo));
+    setQ1Listeners()
+    
   });
 }
 
@@ -144,7 +145,7 @@ function editFormQ2(e, itemList, quadrant) {
     </form>`;
     Q2ToDo = document.querySelector("#Q2-todo");
     Q2EditBtn = document.querySelector("#Q2-edit-btn");
-    Q2EditBtn.addEventListener("click", e => editFormQ2(e, Q2Items, Q2ToDo));
+    setQ2Listeners()
   });
 }
 
@@ -223,7 +224,7 @@ function editFormQ3(e, itemList, quadrant) {
     </form>`;
     Q3ToDo = document.querySelector("#Q3-todo");
     Q3EditBtn = document.querySelector("#Q3-edit-btn");
-    Q3EditBtn.addEventListener("click", e => editFormQ3(e, Q3Items, Q3ToDo));
+    setQ3Listeners()
   });
 }
 
@@ -301,7 +302,7 @@ function editFormQ4(e, itemList, quadrant) {
     </form>`;
     Q4ToDo = document.querySelector("#Q4-todo");
     Q4EditBtn = document.querySelector("#Q4-edit-btn");
-    Q4EditBtn.addEventListener("click", e => editFormQ4(e, Q4Items, Q4ToDo));
+    setQ4Listeners()
   });
 }
 

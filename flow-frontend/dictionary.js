@@ -60,3 +60,35 @@ Q1ToDo.addEventListener('click', e => {deleteItem(e, Q1ToDo); Q1Items = Q1Items.
 Q2ToDo.addEventListener('click', e => {deleteItem(e, Q2ToDo); Q2Items = Q2Items.filter( item =>  item.id != e.target.dataset.id );})
 Q3ToDo.addEventListener('click', e => {deleteItem(e, Q3ToDo); Q3Items = Q3Items.filter( item =>  item.id != e.target.dataset.id );})
 Q4ToDo.addEventListener('click', e => {deleteItem(e, Q4ToDo); Q4Items = Q4Items.filter( item =>  item.id != e.target.dataset.id );})
+
+function setQ1Listeners(){
+    Q1EditBtn.addEventListener("click", e => editFormQ1(e, Q1Items, Q1ToDo));
+    Q1ToDo.addEventListener('click', e => toggleDone(e, Q1Items, Q1ToDo))
+    Q1ToDo.addEventListener('click', e => {deleteItem(e, Q1ToDo); Q1Items = Q1Items.filter( item =>  item.id != e.target.dataset.id );})
+    const quadrantOne = document.querySelector('#Q1');
+    quadrantOne.addEventListener('submit', e => addItem(e, Q1Items, Q1ToDo));
+}
+
+function setQ2Listeners(){
+    Q2EditBtn.addEventListener("click", e => editFormQ2(e, Q2Items, Q2ToDo));
+    Q2ToDo.addEventListener('click', e => toggleDone(e, Q2Items, Q2ToDo))
+    Q2ToDo.addEventListener('click', e => {deleteItem(e, Q2ToDo); Q2Items = Q2Items.filter( item =>  item.id != e.target.dataset.id );})
+    const quadrantOne = document.querySelector('#Q2');
+    quadrantOne.addEventListener('submit', e => addItem(e, Q2Items, Q2ToDo));
+}
+
+function setQ3Listeners(){
+    Q3EditBtn.addEventListener("click", e => editFormQ3(e, Q3Items, Q3ToDo));
+    Q3ToDo.addEventListener('click', e => toggleDone(e, Q3Items, Q3ToDo))
+    Q3ToDo.addEventListener('click', e => {deleteItem(e, Q3ToDo); Q3Items = Q3Items.filter( item =>  item.id != e.target.dataset.id );})
+    const quadrantOne = document.querySelector('#Q3');
+    quadrantOne.addEventListener('submit', e => addItem(e, Q3Items, Q3ToDo));
+}
+
+function setQ4Listeners(){
+    Q4EditBtn.addEventListener("click", e => editFormQ4(e, Q4Items, Q4ToDo));
+    Q4ToDo.addEventListener('click', e => toggleDone(e, Q4Items, Q4ToDo))
+    Q4ToDo.addEventListener('click', e => {deleteItem(e, Q4ToDo); Q4Items = Q4Items.filter( item =>  item.id != e.target.dataset.id );})
+    const quadrantOne = document.querySelector('#Q4');
+    quadrantOne.addEventListener('submit', e => addItem(e, Q4Items, Q4ToDo));
+}
